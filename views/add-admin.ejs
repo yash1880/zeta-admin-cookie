@@ -1,0 +1,146 @@
+<%- include('partials/header') %>
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <h3>Add Admin</h3>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/admin"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item active">Add Admin</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-xl-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h5><%= editAdmin ? 'Edit Admin' : 'Add Admin' %></h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="addAdminForm" class="theme-form" action="/admin/add-admin" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="adminId" value="<%= editAdmin && editAdmin._id ? editAdmin._id : '' %>">
+                            <div class="mb-3 row">
+                                <label class="col-sm-3 col-form-label" for="firstName">First Name</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="firstName" name="firstName" type="text" placeholder="First Name" value="<%= editAdmin && editAdmin.firstName ? editAdmin.firstName : '' %>">
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label class="col-sm-3 col-form-label" for="lastName">Last Name</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="lastName" name="lastName" type="text" placeholder="Last Name" value="<%= editAdmin && editAdmin.lastName ? editAdmin.lastName : '' %>">
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label class="col-sm-3 col-form-label" for="username">Username</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="username" name="username" type="text" placeholder="Username" value="<%= editAdmin && editAdmin.username ? editAdmin.username : '' %>">
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label class="col-sm-3 col-form-label" for="email">Email</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="email" name="email" type="email" placeholder="Email" value="<%= editAdmin && editAdmin.email ? editAdmin.email : '' %>">
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label class="col-sm-3 col-form-label" for="password">Password</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="password" name="password" type="password" placeholder="Password">
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label class="col-sm-3 col-form-label" for="mobile">Contact Number</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="mobile" name="mobile" type="number" placeholder="Contact" value="<%= editAdmin && editAdmin.mobile ? editAdmin.mobile : '' %>">
+                                </div>
+                            </div>
+
+                           
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Gender</label>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="male" value="Male" <%= editAdmin && editAdmin.gender === 'Male' ? 'checked' : '' %>>
+                                        <label class="form-check-label" for="male">Male</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="female" value="Female" <%= editAdmin && editAdmin.gender === 'Female' ? 'checked' : '' %>>
+                                        <label class="form-check-label" for="female">Female</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
+                                <select class="form-select" id="role" name="role">
+                                    <option disabled>Select Role</option>
+                                    <option value="Super Admin" <%= editAdmin && editAdmin.role === 'Super Admin' ? 'selected' : '' %>>Super Admin</option>
+                                    <option value="Admin" <%= editAdmin && editAdmin.role === 'Admin' ? 'selected' : '' %>>Admin</option>
+                                    <option value="Manager" <%= editAdmin && editAdmin.role === 'Manager' ? 'selected' : '' %>>Manager</option>
+                                    <option value="User" <%= editAdmin && editAdmin.role === 'User' ? 'selected' : '' %>>User</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="city" class="col-sm-3 col-form-label">City</label>
+                                <div class="col-sm-9">
+                                    <select class="form-select" id="city" name="city">
+                                        <option disabled>Select City</option>
+                                        <option value="Ahmedabad" <%= editAdmin && editAdmin.city === 'Ahmedabad' ? 'selected' : '' %>>Ahmedabad</option>
+                                        <option value="Surat" <%= editAdmin && editAdmin.city === 'Surat' ? 'selected' : '' %>>Surat</option>
+                                        <option value="Vadodara" <%= editAdmin && editAdmin.city === 'Vadodara' ? 'selected' : '' %>>Vadodara</option>
+                                        <option value="Rajkot" <%= editAdmin && editAdmin.city === 'Rajkot' ? 'selected' : '' %>>Rajkot</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label class="col-sm-3 col-form-label" for="photo">Photo</label>
+                                <div class="col-sm-9">
+                                    <div class="mb-2">
+                                        <img id="photoPreview" src="<%= editAdmin && editAdmin.photo ? editAdmin.photo : '/assets/images/user/user-dp.png' %>" alt="photo" style="width:150px;height:150px;object-fit:cover;border-radius:50%;background:#f5f5f5;display:block;">
+                                    </div>
+                                    <input class="form-control" id="photo" name="photo" type="file" accept="image/*">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" form="addAdminForm" class="btn btn-primary"><%= editAdmin ? 'Update' : 'Submit' %></button>
+                        <a href="/admin/view-admin" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('photo')?.addEventListener('change', function(e){
+    const input = e.target;
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(ev){
+            const img = document.getElementById('photoPreview');
+            if(img) img.src = ev.target.result;
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+});
+</script>
+
+<%- include('partials/footer') %>
