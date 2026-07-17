@@ -1,3 +1,6 @@
+## Project Explanation Video
+https://github.com/yash1880/zeta-admin-cookie/blob/9a5b2947af2b9a15ea424ae8043ada454504c85c/zeta-admin-cookie%201.mp4
+
 # Zeta Admin Panel
 
 A Node.js admin panel with authentication, cookie-based session handling, and a simple dashboard built using Express, MongoDB, and EJS.
